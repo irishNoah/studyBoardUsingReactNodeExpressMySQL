@@ -3,11 +3,9 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Irish</p>
-      </header>
+    <div className="gray-background">
+      <img src={logo} lat="logo" />
+      <h2>This is Irish Management System</h2>
     </div>
   );
 }
