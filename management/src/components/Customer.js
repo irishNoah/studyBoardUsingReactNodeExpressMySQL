@@ -1,40 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
+import { TableRow, TableCell } from "@mui/material";
 
 function Customer(props) {
   return (
-    <div>
-      <CustomerProfile id={props.id} image={props.image} name={props.name} />
-
-      <CustomerInfo
-        birthday={props.birthday}
-        gender={props.gender}
-        job={props.job}
-      />
-    </div>
-  );
-}
-
-// Customer 정보 구조화기 1 - profile
-function CustomerProfile(props) {
-  return (
-    <div>
-      {/* alt는 시각장애인을 위한 속성 */}
-      <img src={props.image} alt="profile" />
-      <h2>
-        {props.name}({props.id})
-      </h2>
-    </div>
-  );
-}
-
-// Customer 정보 구조화기 2 - Info
-function CustomerInfo(props) {
-  return (
-    <div>
-      <p>{props.birthday}</p>
-      <p>{props.gender}</p>
-      <p>{props.job}</p>
-    </div>
+    <TableRow>
+      <TableCell>{props.id}</TableCell>
+      <TableCell>
+        <img src={props.image} alt="profile" />
+      </TableCell>
+      <TableCell>{props.name}</TableCell>
+      <TableCell>{props.birthday}</TableCell>
+      <TableCell>{props.gender}</TableCell>
+      <TableCell>{props.job}</TableCell>
+    </TableRow>
   );
 }
 
