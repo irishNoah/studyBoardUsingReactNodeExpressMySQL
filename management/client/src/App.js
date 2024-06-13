@@ -39,9 +39,9 @@ function App() {
       return body;
     };
 
-    // callApi()
-    //   .then((res) => setCustomers(res))
-    //   .catch((err) => console.log(err));
+    callApi()
+      .then((res) => setCustomers(res))
+      .catch((err) => console.log(err));
 
     const progress = () => {
       setCompleted((prevCompleted) =>
