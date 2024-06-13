@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Customer from "./components/Customer";
 import {
@@ -22,34 +22,21 @@ const StyledTable = styled(Table)({
   minWidth: 1080,
 });
 
-const customers = [
-  {
-    id: 1,
-    image: "https://i.pravatar.cc/150?img=3​​",
-    name: "박창영",
-    birthday: "980630",
-    gender: "male",
-    job: "student",
-  },
-  {
-    id: 2,
-    image: "https://i.pravatar.cc/150?img=1​",
-    name: "홍길동",
-    birthday: "901023",
-    gender: "male",
-    job: "cooker",
-  },
-  {
-    id: 3,
-    image: "https://i.pravatar.cc/150?img=10​",
-    name: "김수현",
-    birthday: "950101",
-    gender: "male",
-    job: "actor",
-  },
-];
-
 function App() {
+  const [customers, setCustomers] = useState("");
+
+  useEffect(() => {
+    const callApi = async () => {
+      const response = await fetch("/api/customers");
+      const body = await response.json();
+      return body;
+    };
+
+    callApi()
+      .then((res) => setCustomers(res))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <StyledPaper>
       <StyledTable>
@@ -64,17 +51,19 @@ function App() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {customers.map((customer) => (
-            <Customer
-              key={customer.id} // map 을 사용하려면 key 라는 속성이 있어야 함(안하면 Console창에 에러가 발생)
-              id={customer.id}
-              image={customer.image}
-              name={customer.name}
-              birthday={customer.birthday}
-              gender={customer.gender}
-              job={customer.job}
-            />
-          ))}
+          {customers
+            ? customers.map((c) => (
+                <Customer
+                  key={c.id} // map 을 사용하려면 key 라는 속성이 있어야 함(안하면 Console창에 에러가 발생)
+                  id={c.id}
+                  image={c.image}
+                  name={c.name}
+                  birthday={c.birthday}
+                  gender={c.gender}
+                  job={c.job}
+                />
+              ))
+            : ""}
         </TableBody>
       </StyledTable>
     </StyledPaper>
